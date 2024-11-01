@@ -13,7 +13,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
       () async {
         if (listScroll.position.pixels == listScroll.position.maxScrollExtent) {
           add(UpdateListEvent());
-          list.addAll(await Api().listGenerate(await Api().randomConsult(20)));
+          list = list + await Api().listGenerate(await Api().randomConsult(20));
           add(ShowListEvent(list: list));
         }
       },
