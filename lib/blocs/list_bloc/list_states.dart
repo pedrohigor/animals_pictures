@@ -6,11 +6,11 @@ abstract class ListState {
 }
 
 class LoadingListState extends ListState {
-  List<AppPicture> list = [];
   LoadingListState() : super([]);
 }
 
 class UpdatedList extends ListState {
+  @override
   List<AppPicture> list;
   UpdatedList({required this.list}) : super(list);
 }

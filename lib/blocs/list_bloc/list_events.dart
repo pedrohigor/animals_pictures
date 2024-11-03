@@ -6,11 +6,8 @@ abstract class ListEvent {
 }
 
 class UpdateListEvent extends ListEvent {
-  List<AppPicture> list = [];
-  UpdateListEvent() : super([]);
-}
-
-class ShowListEvent extends ListEvent {
+  @override
+  // TODO: implement list
   List<AppPicture> list;
-  ShowListEvent({required this.list}) : super(list);
+  UpdateListEvent(this.list) : super(list);
 }

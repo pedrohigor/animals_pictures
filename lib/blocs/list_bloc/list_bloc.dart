@@ -11,22 +11,21 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   ListBloc() : super(LoadingListState()) {
     listScroll.addListener(
       () async {
-        if (listScroll.position.pixels == listScroll.position.maxScrollExtent) {
-          add(UpdateListEvent());
+        if (listScroll.position.pixels >=
+            listScroll.position.maxScrollExtent - 120) {
           list = list + await Api().listGenerate(await Api().randomConsult(20));
-          add(ShowListEvent(list: list));
+
+          add(UpdateListEvent(list));
         }
       },
     );
-    print("inicio consulta");
     Api().randomConsult(20).then(
       (value) {
-        print("fim da consulta (then)");
         list = Api().listGenerate(value);
-        add(ShowListEvent(list: list));
+        add(UpdateListEvent(list));
       },
     );
-    on<UpdateListEvent>((event, emit) => emit(LoadingListState()));
-    on<ShowListEvent>((event, emit) => emit(UpdatedList(list: event.list)));
+    on<UpdateListEvent>((event, emit) => emit(UpdatedList(list: event.list)));
+    ;
   }
 }
